@@ -1,0 +1,54 @@
+<ng-progress></ng-progress>
+<div class="background">
+<form class="center">
+  <div class="form-group">
+        <input type="text" class="form-control" placeholder="username" id="search" [(ngModel)]="username" name="username" (keyup)="findProfile()">
+  </div>
+  </form>
+  <div *ngIf="profile">
+  <div class="container">
+    <div class="style">
+    <div class="row">
+      <div class="col-sm-2 col-md-2">
+        <img src="{{profile.avatar_url}}" alt="profile photo" class="img-rounded img-responsive" />
+      </div>
+      <div class="col-sm-4 col-md-4">
+        <blockquote>
+          Name: {{profile.name}},<br> Username:({{profile.login}}),
+          <br>
+          <span *ngIf="profile.company">works at {{profile.company}},</span>
+          <small><cite title="Source Title">{{profile.location}}<i class="glyphicon glyphicon-map-marker"></i></cite></small>
+        </blockquote>
+        <ul>
+          <li *ngIf="profile.bio"><i class="glyphicon glyphicon-education"></i> {{profile.bio}}</li>
+          <li *ngIf="profile.email"><i class="glyphicon glyphicon-envelope"></i> {{profile.email}}</li>
+          <li *ngIf="profile.hireable"><i class="glyphicon glyphicon-briefcase"></i> Available for hire</li>
+          <li *ngIf="profile.blog"><i class="glyphicon glyphicon-link"></i> <a href="{{profile.blog}}" target="_blank">{{profile.blog}}</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-6 col-md-6">
+        <span class="label label-info">{{profile.public_repos}} Public Repos</span>
+        <span class="label label-primary">{{profile.followers}} followers</span>
+        <span class="label label-default">following {{profile.following}}</span>
+        <span class="label label-success">{{profile.public_gists}} Public gists</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4 col-md-4" *ngFor="let repo of repos">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h5><a href="{{repo.html_url}}" target="_blank">{{repo.name}}</a></h5>
+          </div>
+          <div class="panel-body">
+            <p>
+              <span class="label label-danger">{{repo.forks}} Forks</span>
+              <span class="label label-warning">{{repo.watchers}} watchers</span>
+            </p>
+            <p>{{repo.language}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
